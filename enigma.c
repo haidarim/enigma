@@ -4,14 +4,14 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define ALPHABET "abcdefghijklmnopqrstuvwxyz"
+#define ALPHABET "ABCDEFGHIJKLMNOPQRSTVUWXYZÖÄÅabcdefghijklmnopqrstuvwxyzöäå"
 
 typedef struct
 {
     char *rotor1;
     char *rotor2;
     char *rotor3;
-    char str[83];
+    char str[179];
 } rotors;
 
 rotors *createRotors()
@@ -23,14 +23,14 @@ rotors *createRotors()
         return NULL;
     }
 
-    newRotors->rotor1 = (char *)malloc(27 * sizeof(char)); // Allocate for 26 letters + '\0'
+    newRotors->rotor1 = (char *)malloc(59 * sizeof(char)); // Allocate for 26 letters + '\0'
     if (newRotors->rotor1 == NULL)
     {
         free(newRotors);
         return NULL;
     }
 
-    newRotors->rotor2 = (char *)malloc(27 * sizeof(char)); // Allocate for 26 letters + '\0'
+    newRotors->rotor2 = (char *)malloc(59 * sizeof(char)); // Allocate for 26 letters + '\0'
     if (newRotors->rotor2 == NULL)
     {
         free(newRotors->rotor1);
@@ -38,7 +38,7 @@ rotors *createRotors()
         return NULL;
     }
 
-    newRotors->rotor3 = (char *)malloc(27 * sizeof(char)); // Allocate for 26 letters + '\0'
+    newRotors->rotor3 = (char *)malloc(59 * sizeof(char)); // Allocate for 26 letters + '\0'
     if (newRotors->rotor3 == NULL)
     {
         free(newRotors->rotor1);
@@ -75,8 +75,8 @@ char reflector(char c)
 
 void load(rotors *rs, char *dest, int start)
 {
-    strncpy(dest, rs->str + start, 26);
-    dest[26] = '\0'; // Null-terminate the string
+    strncpy(dest, rs->str + start, 29);
+    dest[29] = '\0'; // Null-terminate the string
     printf("%s\n", dest);
 }
 
@@ -135,10 +135,10 @@ int main()
     printf("%s\n", rs->str);
 
     load(rs, rs->rotor1, 0);
-    load(rs, rs->rotor2, 27);
-    load(rs, rs->rotor3, 54);
+    load(rs, rs->rotor2, 59);
+    load(rs, rs->rotor3, 118);
 
-    char *plain = "og";
+    char *plain = "Hi!";
     int plainsize = strlen(plain);
     char cipher[plainsize + 1]; // +1 for the null-terminator
 

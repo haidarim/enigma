@@ -1,0 +1,29 @@
+name: CI PIPE
+
+on: 
+  push: 
+    branches:
+      - 'main'
+      - 'releases/**'
+
+  pull_request:
+    branches:
+      -  'main'
+
+jobs:
+  #building <--------------------
+  build:
+    runs-on: ubuntu-latest
+
+    #steps ........
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up GCC
+        run: sudo apt install -y gcc
+
+      - name: Build and Run Tests
+        run:
+          chmod +x run.sh
+          ./run.sh

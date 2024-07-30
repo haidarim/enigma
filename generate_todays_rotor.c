@@ -5,7 +5,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define ALPHABET "abcdefghijklmnopqrstuvwxyz"
+#define ALPHABET "ABCDEFGHIJKLMNOPQRSTVUWXYZÖÄÅabcdefghijklmnopqrstuvwxyzöäå"
 
 void shuffle(char *arr, int size){
     srand((unsigned int) time(NULL));
@@ -22,18 +22,18 @@ void shuffle(char *arr, int size){
 
 int main()
 {
-    char rotor1[27];
-    char rotor2[27]; 
-    char rotor3[27]; 
+    char rotor1[59];
+    char rotor2[59]; 
+    char rotor3[59]; 
     
     strcpy(rotor1, ALPHABET);
-    shuffle(rotor1, 27);
+    shuffle(rotor1, 59);
 
     strcpy(rotor2, rotor1);
-    shuffle(rotor2, 27);
+    shuffle(rotor2, 59);
     
     strcpy(rotor3,rotor2);
-    shuffle(rotor3, 27);
+    shuffle(rotor3, 59);
 
     int fd = open("rotor_state_today", O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if(fd == -1)
@@ -42,7 +42,7 @@ int main()
         exit(-1);
     }
     
-    char data[83];
+    char data[179];
     strcpy(data, rotor1);
     strcat(data, " ");
     strcat(data, rotor2);
@@ -50,7 +50,7 @@ int main()
     strcat(data, rotor3);
 
     // Write the structure to the file
-    ssize_t bytes_written = write(fd, &data, 83);
+    ssize_t bytes_written = write(fd, &data, 179);
     if (bytes_written == -1) {
         perror("write failed");
         close(fd);
